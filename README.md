@@ -391,19 +391,19 @@ int main()
 
 
 - Tampilan program saat memilih menu nomor 2
-![image](https://github.com/Daniwahyuaa/str/assets/150106905/90b70ee4-a728-4085-8714-23bf4dc6ba55)
-
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/b3599f93-d08e-4b80-a6e3-36130b41dd31)
 
 - Tampilan program saat memilih menu nomor 3
-![image](https://github.com/Daniwahyuaa/str/assets/150106905/2d89abda-1969-40c7-9969-a6a9867357ec)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/90b70ee4-a728-4085-8714-23bf4dc6ba55)
 
 - Tampilan program saat memilih menu nomor 4
-![image](https://github.com/Daniwahyuaa/str/assets/150106905/1b32b0d3-7492-4ef2-bd9f-67fb8380a15b)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/2d89abda-1969-40c7-9969-a6a9867357ec)
 
 - Tampilan program saat memilih menu nomor 5
-![image](https://github.com/Daniwahyuaa/str/assets/150106905/514a09c3-f341-42d9-8535-f7aa4ad807d0)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/1b32b0d3-7492-4ef2-bd9f-67fb8380a15b)
 
 - Tampilan program saat memilih menu nomor 6
-![image](https://github.com/Daniwahyuaa/str/assets/150106905/5c0ce05c-5b96-4081-803d-f83ea89e9cff)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/514a09c3-f341-42d9-8535-f7aa4ad807d0)
+
 
 
