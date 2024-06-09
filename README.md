@@ -402,4 +402,5 @@ int main()
 ![Screenshot (186)](https://github.com/Daniwahyuaa/str/assets/151950309/20290ed8-a692-42f1-a725-9a7fbc2bdc68)
 
 - Tampilan program saat memilih menu nomor 5
-![Screenshot (187)](https://github.com/Daniwahyuaa/str/assets/151950309/18eb93c7-8277-4bd2-9109-57545253304e)
+![Screenshot (188)](https://github.com/Daniwahyuaa/str/assets/151950309/2aa6ac88-c091-4564-8daa-67af396f1a50)
+
