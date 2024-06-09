@@ -54,10 +54,13 @@ protected:
 };
 ```
 
-#### Metode Publik
+#### Publik
 - **TrainNode(const string &cityName)**: Konstruktor untuk menginisialisasi nama kota.
-- **virtual ~TrainNode()**: Memastikan pembersihan memori yang benar saat objek dihapus. Mengembalikan nama kota.
-- **getName() const**: Mengembalikan nama kota yang disimpan dalam atribut name.
+- **virtual ~TrainNode()**: Destruktor untuk memastikan pembersihan memori yang benar saat objek dihapus.
+- **getName() const**: Mengembalikan nama kota dari node train.
+
+#### Protected
+- **string name**: Menyimpan nama kota yang diwakili oleh node train.
 
 ### TrainGraph
 
@@ -73,10 +76,11 @@ public:
 };
 ```
 
-#### Metode Virtual Murni
-- **void addNode(TrainNode *node)**: Menambahkan node (kota) ke dalam graf.
-- **void addEdge(int node1Index, int node2Index)**: Menambahkan edge (rute) antara dua node.
-- **void display() const**: Menampilkan graf.
+#### Publik
+- **virtual ~TrainGraph()**: Destruktor untuk memastikan pembersihan memori yang benar saat objek dihapus.
+- **void addNode(TrainNode *node)**: Metode virtual murni untuk menambahkan node (kota) ke dalam graf.
+- **void addEdge(int node1Index, int node2Index)**: Metode virtual murni untuk menambahkan edge (rute) antara dua node.
+- **void display() const**: Metode virtual murni untuk menampilkan graf.
 
 ### TrainGraphAdjacencyMatrix
 
@@ -85,22 +89,14 @@ Mengimplementasikan TrainGraph menggunakan matriks ketetanggaan.
 ```cpp
 class TrainGraphAdjacencyMatrix : public TrainGraph
 {
-protected:
-    int nodeCount;
-    vector<TrainNode *> nodes;
-    vector<vector<int>> adjacencyMatrix;
-
 public:
-    TrainGraphAdjacencyMatrix(int size) : nodeCount(0)
-    {
-        adjacencyMatrix.resize(size, vector<int>(size, 0));
-    }
+    TrainGraphAdjacencyMatrix(int size) : nodeCount(0), adjacencyMatrix(size, vector<int>(size, 0)) {}
 
-    ~TrainGraphAdjacencyMatrix()
+    ~TrainGraphAdjacencyMatrix() override
     {
-        for (TrainNode *node : nodes)
+        for (int i = 0; i < nodeCount; i++)
         {
-            delete node;
+            delete nodes[i];
         }
     }
 
@@ -112,39 +108,72 @@ public:
 
     void addEdge(int node1Index, int node2Index) override
     {
-        if (node1Index < nodeCount && node2Index < nodeCount)
-        {
-            adjacencyMatrix[node1Index][node2Index] = 1;
-            adjacencyMatrix[node2Index][node1Index] = 1;
-        }
+        adjacencyMatrix[node1Index][node2Index] = 1;
+        adjacencyMatrix[node2Index][node1Index] = 1;
     }
 
     void display() const override
     {
-        cout << "Adjacency Matrix:" << endl;
+        cout << "-------------------------------------------------------" << endl;
+        cout << "Train Route Graph (Adjacency Matrix):" << endl;
+
         for (int i = 0; i < nodeCount; i++)
         {
+            cout << nodes[i]->getName() << " connected to: ";
+
             for (int j = 0; j < nodeCount; j++)
             {
-                cout << adjacencyMatrix[i][j] << " ";
+                if (adjacencyMatrix[i][j] == 1)
+                {
+                    cout << nodes[j]->getName() << " - ";
+                }
             }
             cout << endl;
         }
+        cout << "-------------------------------------------------------" << endl;
     }
+
+protected:
+    int nodeCount;
+    vector<TrainNode *> nodes;
+    vector<vector<int>> adjacencyMatrix;
 };
 ```
 
-#### Metode Publik
-- **TrainGraphAdjacencyMatrix(int size)**: Konstruktor untuk menginisialisasi graf dengan ukuran tertentu.
-- **~TrainGraphAdjacencyMatrix()**: Destruktor untuk membersihkan memori.
+#### Publik
+- **TrainGraphAdjacencyMatrix(int size)**: Konstruktor untuk Menginisialisasi matriks ketetanggaan berukuran size dengan nilai awal 0 dan menghitung jumlah node awal.
+- **~TrainGraphAdjacencyMatrix() override**: Destruktor untuk menghapus semua node yang dialokasikan dalam graf untuk membersihkan memori.
 - **void addNode(TrainNode *node)**: Menambahkan node (kota) ke dalam graf.
 - **void addEdge(int node1Index, int node2Index)**: Menambahkan edge (rute) antara dua node.
 - **void display() const**: Menampilkan graf.
 
-#### Atribut Privat
-- **int nodeCount**: Jumlah node dalam graf.
-- **vector<TrainNode *> nodes**: Daftar node dalam graf.
-- **vector<vector<int>> adjacencyMatrix**: Matriks ketetanggaan untuk merepresentasikan graf.
+#### Protected
+- **int nodeCount**: Menyimpan jumlah node dalam graf.
+- **vector<TrainNode *> nodes**: Menyimpan daftar node dalam graf.
+- **vector<vector<int>> adjacencyMatrix**: Matriks ketetanggaan untuk merepresentasikan koneksi anat node di dalam graf.
+
+### TrainTransRoute
+
+Merepresentasikan rute transportasi train antar dua lokasi (awal dan akhir)
+
+```cpp
+class TrainTransRoute
+{
+public:
+    TrainTransRoute(const string &start, const string &end) : startLocation(start), endLocation(end) {}
+
+private:
+    string startLocation;
+    string endLocation;
+};
+```
+
+#### Public
+- **TrainTransRoute(const string &start, const string &end)**: Konstruktor untuk menetapkan nilai objek rute dengan lokasi awal dan lokasi akhir yang diberikan.
+
+#### Private
+- **string startLocation**: Menyimpan nama kota awal rute train.
+- **string endLocation**: Menyimpan nama kota akhir rute train.
 
 ### TrainRoute
 
@@ -156,218 +185,35 @@ class TrainRoute : public TrainGraphAdjacencyMatrix
 public:
     TrainRoute(int size) : TrainGraphAdjacencyMatrix(size) {}
 
-    int findNodeIndex(const string &nodeName)
-    {
-        for (int i = 0; i < nodeCount; i++)
-        {
-            if (nodes[i]->getName() == nodeName)
-                return i;
-        }
-        return -1; // Not found
-    }
-
-    void displayShortestRoute(const string &startLocation, const string &endLocation)
-    {
-        int startIndex = findNodeIndex(startLocation);
-        int endIndex = findNodeIndex(endLocation);
-
-        if (startIndex == -1 || endIndex == -1)
-        {
-            cout << "Invalid start or end location." << endl;
-            return;
-        }
-
-        vector<int> distance(nodeCount, INT_MAX);
-        vector<bool> visited(nodeCount, false);
-        vector<int> parent(nodeCount, -1);
-
-        distance[startIndex] = 0;
-
-        for (int i = 0; i < nodeCount - 1; i++)
-        {
-            int u = minDistance(distance, visited);
-            visited[u] = true;
-
-            for (int v = 0; v < nodeCount; v++)
-            {
-                if (!visited[v] && adjacencyMatrix[u][v] && distance[u] != INT_MAX && distance[u] + adjacencyMatrix[u][v] < distance[v])
-                {
-                    distance[v] = distance[u] + adjacencyMatrix[u][v];
-                    parent[v] = u;
-                }
-            }
-        }
-
-        printShortestRoute(startIndex, endIndex, parent);
-    }
-
-    void displayAllRoutes(const string &startLocation, const string &endLocation)
-    {
-        int startIndex = findNodeIndex(startLocation);
-        int endIndex = findNodeIndex(endLocation);
-
-        if (startIndex == -1 || endIndex == -1)
-        {
-            cout << "Invalid start or end location." << endl;
-            return;
-        }
-
-        vector<int> visited(nodeCount, false);
-        vector<int> path;
-
-        dfsAllRoutes(startIndex, endIndex, visited, path);
-    }
-
-    void deleteRoute(int node1Index, int node2Index)
-    {
-        if (node1Index < nodeCount && node2Index < nodeCount)
-        {
-            adjacencyMatrix[node1Index][node2Index] = 0;
-            adjacencyMatrix[node2Index][node1Index] = 0;
-            printDeletedRoute(node1Index, node2Index);
-        }
-    }
-
-    void addRoute(int node1Index, int node2Index)
-    {
-        if (node1Index < nodeCount && node2Index < nodeCount)
-        {
-            adjacencyMatrix[node1Index][node2Index] = 1;
-            adjacencyMatrix[node2Index][node1Index] = 1;
-            printAddedRoute(node1Index, node2Index);
-        }
-    }
-
-    void displayAdjacencyMatrix() const
-    {
-        display();
-    }
+    int findNodeIndex(const string &nodeName);
+    void displayShortestRoute(const string &startLocation, const string &endLocation);
+    void displayAllRoutes(const string &startLocation, const string &endLocation);
+    void deleteRoute(int node1Index, int node2Index);
+    void addRoute(int node1Index, int node2Index);
+    void displayAdjacencyMatrix() const;
 
 private:
-    void dfs(int currentNode, int targetNode, vector<int> &visited, vector<int> &path, bool &found)
-    {
-        visited[currentNode] = true;
-        path.push_back(currentNode);
-
-        if (currentNode == targetNode)
-        {
-            for (int i = 0; i < path.size(); i++)
-            {
-                if (i != 0)
-                    cout << " -> ";
-                cout << nodes[path[i]]->getName();
-            }
-            cout << endl;
-            found = true;
-        }
-        else
-        {
-            for (int i = 0; i < nodeCount; i++)
-            {
-                if (adjacencyMatrix[currentNode][i] && !visited[i])
-                {
-                    dfs(i, targetNode, visited, path, found);
-                }
-            }
-        }
-
-        path.pop_back();
-        visited[currentNode] = false;
-    }
-
-    int minDistance(const vector<int> &distance, const vector<bool> &visited)
-    {
-        int min = INT_MAX, min_index;
-
-        for (int v = 0; v < nodeCount; v++)
-        {
-            if (!visited[v] && distance[v] <= min)
-            {
-                min = distance[v];
-                min_index = v;
-            }
-        }
-
-        return min_index;
-    }
-
-    void printShortestRoute(int start, int end, const vector<int> &parent)
-    {
-        if (start == end)
-        {
-            cout << nodes[start]->getName();
-        }
-        else if
-
- (parent[end] == -1)
-        {
-            cout << "No path from " << nodes[start]->getName() << " to " << nodes[end]->getName() << endl;
-        }
-        else
-        {
-            printShortestRoute(start, parent[end]);
-            cout << " -> " << nodes[end]->getName();
-        }
-    }
-
-    void dfsAllRoutes(int currentNode, int targetNode, vector<int> &visited, vector<int> &path)
-    {
-        visited[currentNode] = true;
-        path.push_back(currentNode);
-
-        if (currentNode == targetNode)
-        {
-            for (int i = 0; i < path.size(); i++)
-            {
-                if (i != 0)
-                    cout << " -> ";
-                cout << nodes[path[i]]->getName();
-            }
-            cout << endl;
-        }
-        else
-        {
-            for (int i = 0; i < nodeCount; i++)
-            {
-                if (adjacencyMatrix[currentNode][i] && !visited[i])
-                {
-                    dfsAllRoutes(i, targetNode, visited, path);
-                }
-            }
-        }
-
-        path.pop_back();
-        visited[currentNode] = false;
-    }
-
-    void printRouteHeader() const
-    {
-        cout << "Route: ";
-    }
-
-    void printDeletedRoute(int node1Index, int node2Index)
-    {
-        cout << "Deleted route between " << nodes[node1Index]->getName() << " and " << nodes[node2Index]->getName() << endl;
-    }
-
-    void printAddedRoute(int node1Index, int node2Index)
-    {
-        cout << "Added route between " << nodes[node1Index]->getName() << " and " << nodes[node2Index]->getName() << endl;
-    }
+    void dfs(int currentNode, int targetNode, vector<int> &visited, vector<int> &path, bool &found);
+    int minDistance(const vector<int> &distance, const vector<bool> &visited);
+    void printShortestRoute(int start, int end, const vector<int> &parent);
+    void dfsAllRoutes(int currentNode, int targetNode, vector<int> &visited, vector<int> &path);
+    void printRouteHeader() const;
+    void printDeletedRoute(int node1Index, int node2Index);
+    void printAddedRoute(int node1Index, int node2Index);
 };
 ```
 
-#### Metode Publik
+#### Publik
 - **TrainRoute(int size)**: Konstruktor untuk menginisialisasi graf dengan ukuran tertentu.
 - **int findNodeIndex(const string &nodeName)**: Mencari indeks node berdasarkan nama kota.
 - **void displayShortestRoute(const string &startLocation, const string &endLocation)**: Menampilkan rute terpendek antara dua kota.
-- **void displayAllRoutes(const string &startLocation, const string &endLocation)**: Menampilkan semua rute yang mungkin antara dua kota.
+- **void displayAllRoutes(const string &startLocation, const string &endLocation)**: Menampilkan semua rute yang mungkin dilewati antar dua kota.
 - **void deleteRoute(int node1Index, int node2Index)**: Menghapus rute antara dua node.
 - **void addRoute(int node1Index, int node2Index)**: Menambahkan rute antara dua node.
 - **void displayAdjacencyMatrix() const**: Menampilkan matriks ketetanggaan.
 
-#### Metode Privat
-- **void dfs(int currentNode, int targetNode, vector<int> &visited, vector<int> &path, bool &found)**: Metode rekursif untuk mencari rute menggunakan pencarian mendalam (DFS).
+#### Private
+- **void dfs(int currentNode, int targetNode, vector<int> &visited, vector<int> &path, bool &found)**: Melakukan pencarian jalur dari node saat ini ke node target menggunakan algoritma mendalam (DFS).
 - **int minDistance(const vector<int> &distance, const vector<bool> &visited)**: Mencari node dengan jarak minimum yang belum dikunjungi (digunakan dalam algoritma Dijkstra).
 - **void printShortestRoute(int start, int end, const vector<int> &parent)**: Mencetak rute terpendek antara dua node.
 - **void dfsAllRoutes(int currentNode, int targetNode, vector<int> &visited, vector<int> &path)**: Metode rekursif untuk mencari semua rute yang mungkin menggunakan DFS.
