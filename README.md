@@ -240,20 +240,20 @@ Berikut adalah penggunaan program:
 int main()
 {
     TrainRoute TrainRoute(20);
-
+// menambahkan kota
     TrainRoute.addNode(new TrainNode("Jakarta"));      // 0
-    TrainRoute.addNode(new TrainNode("Kediri"));   // 1
-    TrainRoute.addNode(new TrainNode("Malang"));      // 2
+    TrainRoute.addNode(new TrainNode("Kediri"));       // 1
+    TrainRoute.addNode(new TrainNode("Malang"));       // 2
     TrainRoute.addNode(new TrainNode("Surabaya"));     // 3
-    TrainRoute.addNode(new TrainNode("Banyuwangi"));         // 4
-    TrainRoute.addNode(new TrainNode("Bandung"));       // 5
-    TrainRoute.addNode(new TrainNode("Semarang")); // 6
-    TrainRoute.addNode(new TrainNode("Kutoarjo"));    // 7
-    TrainRoute.addNode(new TrainNode("Purwokerto"));      // 8
-    TrainRoute.addNode(new TrainNode("Yogyakarta"));        // 9
-    TrainRoute.addNode(new TrainNode("Solo"));        // 10
-    TrainRoute.addNode(new TrainNode("Nganjuk"));       // 11
-    TrainRoute.addNode(new TrainNode("Blitar"));        // 12
+    TrainRoute.addNode(new TrainNode("Banyuwangi"));   // 4
+    TrainRoute.addNode(new TrainNode("Bandung"));      // 5
+    TrainRoute.addNode(new TrainNode("Semarang"));     // 6
+    TrainRoute.addNode(new TrainNode("Kutoarjo"));     // 7
+    TrainRoute.addNode(new TrainNode("Purwokerto"));   // 8
+    TrainRoute.addNode(new TrainNode("Yogyakarta"));   // 9
+    TrainRoute.addNode(new TrainNode("Solo"));         // 10
+    TrainRoute.addNode(new TrainNode("Nganjuk"));      // 11
+    TrainRoute.addNode(new TrainNode("Blitar"));       // 12
 
     TrainRoute.addEdge(0, 1);   // Jakarta - Kediri
     TrainRoute.addEdge(0, 3);   // Jakarta - Surabaya
@@ -279,14 +279,14 @@ int main()
     do
     {
         cout << "\nMenu:\n";
-        cout << "1. Show Shortest Route\n";
-        cout << "2. Show All Routes\n";
-        cout << "3. Add City\n";
-        cout << "4. Add Route\n";
-        cout << "5. Delete Route\n";
-        cout << "6. Show Adjacency Matrix\n";
+        cout << "1. Menunjukkan Rute Terpendek\n";
+        cout << "2. Menunjukkan Semua Rute\n";
+        cout << "3. Tambah Kota\n";
+        cout << "4. Tambah Rute\n";
+        cout << "5. Hapus Rute\n";
+        cout << "6. Menunjukkan Adjency Matrix\n";
         cout << "0. Exit\n";
-        cout << "Enter your choice: ";
+        cout << "Pilih Menu: ";
         cin >> choice;
 
         cin.ignore();
@@ -296,10 +296,10 @@ int main()
         case 1:
         {
             string startLocation, endLocation;
-            cout << "Enter start location: ";
+            cout << "Pilih Keberangkatan: ";
             getline(cin, startLocation);
 
-            cout << "Enter end location: ";
+            cout << "Pilih Tujuan: ";
             getline(cin, endLocation);
 
             TrainRoute.displayShortestRoute(startLocation, endLocation);
@@ -308,10 +308,10 @@ int main()
         case 2:
         {
             string startLocation, endLocation;
-            cout << "Enter start location: ";
+            cout << "Pilih Keberangkatan: ";
             getline(cin, startLocation);
 
-            cout << "Enter end location: ";
+            cout << "Pilih Tujuan: ";
             getline(cin, endLocation);
 
             TrainRoute.displayAllRoutes(startLocation, endLocation);
@@ -320,17 +320,17 @@ int main()
         case 3:
         {
             string cityName;
-            cout << "Enter the name of the city to add: ";
+            cout << "Masukkan Nama Kota: ";
             getline(cin, cityName);
 
             TrainRoute.addNode(new TrainNode(cityName));
-            cout << "City added successfully.\n";
+            cout << "Kota Berhasil Ditambahkan.\n";
             break;
         }
         case 4:
         {
             string city1, city2;
-            cout << "Enter the names of the cities to add the route (space-separated): ";
+            cout << "Tambahkan 2 Nama Kota yang akan ditambahkan Ke Rute: ";
             cin >> city1 >> city2;
 
             int node1 = TrainRoute.findNodeIndex(city1);
@@ -342,14 +342,14 @@ int main()
             }
             else
             {
-                cout << "Invalid city names. Please enter valid city names.\n";
+                cout << "Kota Tidak Ada. Masukkan kota yang tersedia.\n";
             }
             break;
         }
         case 5:
         {
             string city1, city2;
-            cout << "Enter the names of the cities to delete the route (space-separated): ";
+            cout << "Masukkan 2 Nama Kota yang rutenya akan dihapus: ";
             cin >> city1 >> city2;
 
             int node1 = TrainRoute.findNodeIndex(city1);
@@ -361,20 +361,20 @@ int main()
             }
             else
             {
-                cout << "Invalid city names. Please enter valid city names.\n";
+                cout << "Kota Tidak Tersedi. Masukkan Kota Yang Tersedia.\n";
             }
             break;
         }
         case 6:
         {
-            TrainRoute.displayAdjacencyMatrix();
+            TrainRoute.displayAdjencyMatrix();
             break;
         }
         case 0:
-            cout << "Exiting...\n";
+            cout << "Keluar...\n";
             break;
         default:
-            cout << "Invalid choice. Please enter a valid option.\n";
+            cout << "Pilihan Tidak Ada. Pilih 0 - 6.\n";
         }
     } while (choice != 0);
 
@@ -384,23 +384,26 @@ int main()
 
 ## Hasil
 - Tampilan awal program
-![Screenshot (176)](https://github.com/Daniwahyuaa/str/assets/151950309/5be4bcb0-102d-4dac-b56c-d7690ba0ad78)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/8c7bb4f1-3fae-4a9d-a54d-82baaeb27fbf)
 
 - Tampilan program saat memilih menu nomor 1
-![Screenshot (182)](https://github.com/Daniwahyuaa/str/assets/151950309/811ddd9e-a27f-43e6-b1cc-612345f2d0bf)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/b3599f93-d08e-4b80-a6e3-36130b41dd31)
+
 
 - Tampilan program saat memilih menu nomor 2
-![Screenshot (183)](https://github.com/Daniwahyuaa/str/assets/151950309/fd5b357e-7a49-43db-ae8a-9856c23c0cc1)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/90b70ee4-a728-4085-8714-23bf4dc6ba55)
+
 
 - Tampilan program saat memilih menu nomor 3
-![Screenshot (184)](https://github.com/Daniwahyuaa/str/assets/151950309/89eb497d-8ec1-476b-bdc4-eddeb1fdde3c)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/2d89abda-1969-40c7-9969-a6a9867357ec)
 
 - Tampilan program saat memilih menu nomor 4
-![Screenshot (185)](https://github.com/Daniwahyuaa/str/assets/151950309/192a1f88-9a9c-4d57-96f0-e15cf0e397cc)
-
-- Tampilan program saat memilih menu nomor 6
-![Screenshot (186)](https://github.com/Daniwahyuaa/str/assets/151950309/20290ed8-a692-42f1-a725-9a7fbc2bdc68)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/1b32b0d3-7492-4ef2-bd9f-67fb8380a15b)
 
 - Tampilan program saat memilih menu nomor 5
-![Screenshot (188)](https://github.com/Daniwahyuaa/str/assets/151950309/2aa6ac88-c091-4564-8daa-67af396f1a50)
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/514a09c3-f341-42d9-8535-f7aa4ad807d0)
+
+- Tampilan program saat memilih menu nomor 6
+![image](https://github.com/Daniwahyuaa/str/assets/150106905/5c0ce05c-5b96-4081-803d-f83ea89e9cff)
+
 
