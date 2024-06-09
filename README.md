@@ -245,18 +245,18 @@ int main()
     TrainRoute TrainRoute(20);
 
     TrainRoute.addNode(new TrainNode("Jakarta"));      // 0
-    TrainRoute.addNode(new TrainNode("Kediri"));       // 1
-    TrainRoute.addNode(new TrainNode("Malang"));       // 2
+    TrainRoute.addNode(new TrainNode("Kediri"));   // 1
+    TrainRoute.addNode(new TrainNode("Malang"));      // 2
     TrainRoute.addNode(new TrainNode("Surabaya"));     // 3
-    TrainRoute.addNode(new TrainNode("Banyuwangi"));   // 4
-    TrainRoute.addNode(new TrainNode("Bandung"));      // 5
-    TrainRoute.addNode(new TrainNode("Semarang"));     // 6
-    TrainRoute.addNode(new TrainNode("Kutoarjo"));     // 7
-    TrainRoute.addNode(new TrainNode("Purwokerto"));   // 8
-    TrainRoute.addNode(new TrainNode("Yogyakarta"));   // 9
-    TrainRoute.addNode(new TrainNode("Solo"));         // 10
-    TrainRoute.addNode(new TrainNode("Nganjuk"));      // 11
-    TrainRoute.addNode(new TrainNode("Blitar"));       // 12
+    TrainRoute.addNode(new TrainNode("Banyuwangi"));         // 4
+    TrainRoute.addNode(new TrainNode("Bandung"));       // 5
+    TrainRoute.addNode(new TrainNode("Semarang")); // 6
+    TrainRoute.addNode(new TrainNode("Kutoarjo"));    // 7
+    TrainRoute.addNode(new TrainNode("Purwokerto"));      // 8
+    TrainRoute.addNode(new TrainNode("Yogyakarta"));        // 9
+    TrainRoute.addNode(new TrainNode("Solo"));        // 10
+    TrainRoute.addNode(new TrainNode("Nganjuk"));       // 11
+    TrainRoute.addNode(new TrainNode("Blitar"));        // 12
 
     TrainRoute.addEdge(0, 1);   // Jakarta - Kediri
     TrainRoute.addEdge(0, 3);   // Jakarta - Surabaya
@@ -287,57 +287,97 @@ int main()
         cout << "3. Add City\n";
         cout << "4. Add Route\n";
         cout << "5. Delete Route\n";
-        cout << "6. Display Adjacency Matrix\n";
+        cout << "6. Show Adjacency Matrix\n";
         cout << "0. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
-        string startLocation, endLocation, cityName;
-        int node1Index, node2Index;
+        cin.ignore();
+
         switch (choice)
         {
         case 1:
+        {
+            string startLocation, endLocation;
             cout << "Enter start location: ";
-            cin >> startLocation;
+            getline(cin, startLocation);
+
             cout << "Enter end location: ";
-            cin >> endLocation;
+            getline(cin, endLocation);
+
             TrainRoute.displayShortestRoute(startLocation, endLocation);
             break;
+        }
         case 2:
+        {
+            string startLocation, endLocation;
             cout << "Enter start location: ";
-            cin >> startLocation;
+            getline(cin, startLocation);
+
             cout << "Enter end location: ";
-            cin >> endLocation;
+            getline(cin, endLocation);
+
             TrainRoute.displayAllRoutes(startLocation, endLocation);
             break;
+        }
         case 3:
-            cout << "Enter city name: ";
-            cin >> cityName;
+        {
+            string cityName;
+            cout << "Enter the name of the city to add: ";
+            getline(cin, cityName);
+
             TrainRoute.addNode(new TrainNode(cityName));
+            cout << "City added successfully.\n";
             break;
+        }
         case 4:
-            cout << "Enter index of first city: ";
-            cin >> node1Index;
-            cout << "Enter index of second city: ";
-            cin >> node2Index;
-            TrainRoute.addRoute(node1Index, node2Index);
+        {
+            string city1, city2;
+            cout << "Enter the names of the cities to add the route (space-separated): ";
+            cin >> city1 >> city2;
+
+            int node1 = TrainRoute.findNodeIndex(city1);
+            int node2 = TrainRoute.findNodeIndex(city2);
+
+            if (node1 != -1 && node2 != -1)
+            {
+                TrainRoute.addRoute(node1, node2);
+            }
+            else
+            {
+                cout << "Invalid city names. Please enter valid city names.\n";
+            }
             break;
+        }
         case 5:
-            cout << "Enter index of first city: ";
-            cin >> node1Index;
-            cout << "Enter index of second city: ";
-            cin >> node2Index;
-            TrainRoute.deleteRoute(node1Index, node2Index);
+        {
+            string city1, city2;
+            cout << "Enter the names of the cities to delete the route (space-separated): ";
+            cin >> city1 >> city2;
+
+            int node1 = TrainRoute.findNodeIndex(city1);
+            int node2 = TrainRoute.findNodeIndex(city2);
+
+            if (node1 != -1 && node2 != -1)
+            {
+                TrainRoute.deleteRoute(node1, node2);
+            }
+            else
+            {
+                cout << "Invalid city names. Please enter valid city names.\n";
+            }
             break;
+        }
         case 6:
+        {
             TrainRoute.displayAdjacencyMatrix();
             break;
+        }
         case 0:
             cout << "Exiting...\n";
             break;
         default:
-            cout << "Invalid choice. Please try again.\n";
-            break;
+            cout << "Invalid choice. Please enter a valid option.\n";
         }
     } while (choice != 0);
 
