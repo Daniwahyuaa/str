@@ -385,3 +385,180 @@ int main()
 }
 ```
 
+## Hasil
+- Tampilan awal program
+``` 
+Train Route Graph (Adjacency Matrix):
+Jakarta connected to: Kediri - Surabaya - Banyuwangi - Bandung - Semarang - Kutoarjo -
+Kediri connected to: Jakarta - Malang - Surabaya - Banyuwangi -
+Malang connected to: Kediri -
+Surabaya connected to: Jakarta - Kediri - Banyuwangi -
+Banyuwangi connected to: Jakarta - Kediri - Surabaya -
+Bandung connected to: Jakarta -
+Semarang connected to: Jakarta - Kutoarjo -
+Kutoarjo connected to: Jakarta - Semarang - Purwokerto - Yogyakarta - Solo -
+Purwokerto connected to: Kutoarjo - Yogyakarta -
+Yogyakarta connected to: Kutoarjo - Purwokerto -
+Solo connected to: Kutoarjo - Nganjuk - Blitar -
+Nganjuk connected to: Solo - Blitar -
+Blitar connected to: Solo - Nganjuk -
+-------------------------------------------------------
+
+Menu:
+1. Show Shortest Route
+2. Show All Routes
+3. Add City
+4. Add Route
+5. Delete Route
+6. Show Adjacency Matrix
+0. Exit
+Enter your choice:
+```
+
+- Tampilan program saat memilih menu nomor 1
+![Screenshot (177)](https://github.com/Daniwahyuaa/str/assets/151950309/f1143957-0074-4b02-95a3-8dce000d7516)
+
+- Tampilan program saat memilih menu nomor 2
+```
+Menu:
+1. Show Shortest Route
+2. Show All Routes
+3. Add City
+4. Add Route
+5. Delete Route
+6. Show Adjacency Matrix
+0. Exit
+Enter your choice: 2
+Enter start location: Jakarta           
+Enter end location: Yogyakarta
+-------------------------------------------------------
+All possible routes from Jakarta to Yogyakarta:
+Route: Jakarta - Semarang - Kutoarjo - Purwokerto - Yogyakarta
+Route: Jakarta - Semarang - Kutoarjo - Yogyakarta
+Route: Jakarta - Kutoarjo - Purwokerto - Yogyakarta
+Route: Jakarta - Kutoarjo - Yogyakarta
+-------------------------------------------------------
+```
+
+- Tampilan program saat memilih menu nomor 3
+```
+Menu:
+1. Show Shortest Route
+2. Show All Routes
+3. Add City
+4. Add Route
+5. Delete Route
+6. Show Adjacency Matrix
+0. Exit
+Enter your choice: 3
+Enter the name of the city to add: Bogor
+City added successfully.
+```
+
+- Tampilan program saat memilih menu nomor 4
+```
+Menu:
+1. Show Shortest Route
+2. Show All Routes
+3. Add City
+4. Add Route
+5. Delete Route
+6. Show Adjacency Matrix
+0. Exit
+Enter your choice: 4
+Enter the names of the cities to add the route (space-separated): Bogor
+Bandung
+-------------------------------------------------------
+Route added: Bogor - Bandung
+-------------------------------------------------------
+
+Menu:
+1. Show Shortest Route
+2. Show All Routes
+3. Add City
+4. Add Route
+5. Delete Route
+6. Show Adjacency Matrix
+0. Exit
+Enter your choice: 4
+Enter the names of the cities to add the route (space-separated): Bogor 
+Jakarta
+-------------------------------------------------------
+Route added: Bogor - Jakarta
+-------------------------------------------------------
+```
+
+- Tampilan program saat memilih menu nomor 6
+```
+Menu:
+1. Show Shortest Route
+2. Show All Routes
+3. Add City
+4. Add Route
+5. Delete Route
+6. Show Adjacency Matrix
+0. Exit
+Enter your choice: 6
+-------------------------------------------------------
+Train Route Graph (Adjacency Matrix):
+Jakarta connected to: Kediri - Surabaya - Banyuwangi - Bandung - Semarang - Kutoarjo - Bogor -
+Kediri connected to: Jakarta - Malang - Surabaya - Banyuwangi -
+Malang connected to: Kediri -
+Surabaya connected to: Jakarta - Kediri - Banyuwangi -
+Banyuwangi connected to: Jakarta - Kediri - Surabaya -
+Bandung connected to: Jakarta - Bogor -
+Semarang connected to: Jakarta - Kutoarjo -
+Kutoarjo connected to: Jakarta - Semarang - Purwokerto - Yogyakarta - Solo -
+Purwokerto connected to: Kutoarjo - Yogyakarta -
+Yogyakarta connected to: Kutoarjo - Purwokerto -
+Solo connected to: Kutoarjo - Nganjuk - Blitar -
+Nganjuk connected to: Solo - Blitar -
+Blitar connected to: Solo - Nganjuk -
+Bogor connected to: Jakarta - Bandung -
+-------------------------------------------------------
+```
+
+- Tampilan program saat memilih menu nomor 5
+```
+Menu:
+1. Show Shortest Route
+2. Show All Routes
+3. Add City
+4. Add Route
+5. Delete Route
+6. Show Adjacency Matrix
+0. Exit
+Enter your choice: 5
+Enter the names of the cities to delete the route (space-separated): Bogor
+Jakarta
+-------------------------------------------------------
+Route deleted: Bogor - Jakarta
+-------------------------------------------------------
+
+Menu:
+1. Show Shortest Route
+2. Show All Routes
+3. Add City
+4. Add Route
+5. Delete Route
+6. Show Adjacency Matrix
+0. Exit
+Enter your choice: 6
+-------------------------------------------------------
+Train Route Graph (Adjacency Matrix):
+Jakarta connected to: Kediri - Surabaya - Banyuwangi - Bandung - Semarang - Kutoarjo -
+Kediri connected to: Jakarta - Malang - Surabaya - Banyuwangi -
+Malang connected to: Kediri -
+Surabaya connected to: Jakarta - Kediri - Banyuwangi -
+Banyuwangi connected to: Jakarta - Kediri - Surabaya -
+Bandung connected to: Jakarta - Bogor -
+Semarang connected to: Jakarta - Kutoarjo -
+Kutoarjo connected to: Jakarta - Semarang - Purwokerto - Yogyakarta - Solo -
+Purwokerto connected to: Kutoarjo - Yogyakarta -
+Yogyakarta connected to: Kutoarjo - Purwokerto -
+Solo connected to: Kutoarjo - Nganjuk - Blitar -
+Nganjuk connected to: Solo - Blitar -
+Blitar connected to: Solo - Nganjuk -
+Bogor connected to: Bandung -
+-------------------------------------------------------
+```
