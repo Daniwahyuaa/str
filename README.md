@@ -40,22 +40,24 @@ Mewakili sebuah kota dalam graf.
 ```cpp
 class TrainNode
 {
-private:
-    string cityName;
-
 public:
-    TrainNode(const string &cityName) : cityName(cityName) {}
+    TrainNode(const string &cityName) : name(cityName) {}
+    virtual ~TrainNode() {}
 
     string getName() const
     {
-        return cityName;
+        return name;
     }
+
+protected:
+    string name;
 };
 ```
 
 #### Metode Publik
 - **TrainNode(const string &cityName)**: Konstruktor untuk menginisialisasi nama kota.
-- **string getName() const**: Mengembalikan nama kota.
+- **virtual ~TrainNode()**: Memastikan pembersihan memori yang benar saat objek dihapus. Mengembalikan nama kota.
+- **getName() const**: Mengembalikan nama kota yang disimpan dalam atribut name.
 
 ### TrainGraph
 
