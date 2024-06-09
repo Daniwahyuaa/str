@@ -28,7 +28,7 @@ Pada project kali ini, kelompok kami mengimplementasikan sistem manajemen rute k
 - Menghapus rute kereta api antara dua kota.
 - Menampilkan rute terpendek antara dua kota menggunakan algoritma Dijkstra.
 - Menampilkan semua rute yang mungkin antara dua kota menggunakan pencarian mendalam (DFS).
-- Menampilkan matriks ketetanggaan yang merepresentasikan graf rute kereta api.
+- Menampilkan adjacency matrix yang merepresentasikan graf rute kereta api.
 
 ## Kelas
 
@@ -231,7 +231,7 @@ Program ini menyediakan antarmuka menu untuk mengelola rute kereta api. Pilihan 
 3. Menambahkan Kota
 4. Menambahkan Rute
 5. Menghapus Rute
-6. Menampilkan Matriks Ketetanggaan
+6. Menampilkan adjacency matrix
 0. Keluar
 
 Berikut adalah penggunaan program:
