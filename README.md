@@ -6,7 +6,7 @@ Anggota Kelompok :
 |5027231038|Dani Wahyu Anak Ary|
 |5027231076|Syela Zeruya Tandi Lalong|
 
-Pada royek kali ini, kelompok kami mengimplementasikan sistem manajemen rute kereta api menggunakan struktur data graf di C++. Sistem ini memungkinkan pengguna untuk mengelola kota (node) dan rute kereta api (edge) di antara mereka, serta menyediakan fungsionalitas untuk menemukan rute terpendek dan semua rute yang mungkin antara dua kota.
+Pada project kali ini, kelompok kami mengimplementasikan sistem manajemen rute kereta api menggunakan struktur data graf di C++. Sistem ini memungkinkan pengguna untuk mengelola kota (node) dan rute kereta api (edge) di antara mereka, serta menyediakan fungsionalitas untuk menemukan rute terpendek dan semua rute yang mungkin antara dua kota.
 
 ## Daftar Isi
 
