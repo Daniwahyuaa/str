@@ -236,9 +236,7 @@ Program ini menyediakan antarmuka menu untuk mengelola rute kereta api. Pilihan 
 6. Menampilkan Matriks Ketetanggaan
 0. Keluar
 
-### Contoh
-
-Berikut adalah contoh penggunaan program:
+Berikut adalah penggunaan program:
 
 ```cpp
 int main()
