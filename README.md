@@ -389,7 +389,6 @@ int main()
 - Tampilan program saat memilih menu nomor 1
 ![image](https://github.com/Daniwahyuaa/str/assets/150106905/b3599f93-d08e-4b80-a6e3-36130b41dd31)
 
-
 - Tampilan program saat memilih menu nomor 2
 ![image](https://github.com/Daniwahyuaa/str/assets/150106905/b3599f93-d08e-4b80-a6e3-36130b41dd31)
 
