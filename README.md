@@ -18,9 +18,7 @@ Pada project kali ini, kelompok kami mengimplementasikan sistem manajemen rute k
   - [TrainRoute](#trainroute)
   - [TrainTransRoute](#traintransroute)
 - [Penggunaan](#penggunaan)
-- [Pilihan Menu](#pilihan-menu)
-- [Contoh](#contoh)
-- [Instalasi](#instalasi)
+  - [Pilihan Menu](#pilihan-menu)
 - [Hasil](#hasil)
 
 ## Fitur
